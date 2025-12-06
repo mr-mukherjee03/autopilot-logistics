@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # The Node.js Backend
+  backend:
+    build: .
+    container_name: autopilot_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongodb:27017/autopilot
+      - SESSION_SECRET=your_docker_session_secret
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+    networks:
+      - autopilot-network
+
+  # The Database
+  mongodb:
+    image: mongo:latest
+    container_name: autopilot_mongo
+    restart: always
+    ports:
+      - "27017:27017" # Exposed to host for debugging tools (Compass/Studio 3T)
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - autopilot-network
+
+volumes:
+  mongo_data:
+
+networks:
+  autopilot-network:
+    driver: bridge
