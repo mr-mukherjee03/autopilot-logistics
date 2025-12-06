@@ -33,7 +33,8 @@ This will spin up both the backend and the database automatically.
    npm install
    ```
 2. Start MongoDB: Ensure you have a local MongoDB instance running on port 27017.
-3. Setup Environment : Create a ```.env``` file in the root :   ```bash
+3. Setup Environment : Create a ```.env``` file in the root :   
+```bash
     PORT=3000
     MONGO_URI=mongodb://localhost:27017/autopilot
     SESSION_SECRET=dev_secret
